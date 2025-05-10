@@ -37,7 +37,7 @@ function LoginPage() {
             </p>
             <form
               onSubmit={submitHandler}
-              class="w-full max-w-sm space-y-4"
+              className="w-full max-w-sm space-y-4"
             >
               <input
                 type="email"
@@ -91,15 +91,15 @@ function LoginPage() {
             )}
           </div>
         </div>
-        <div class="flex flex-col justify-center items-center bg-primary-light  text-center p-8">
-        <h2 class="text-3xl font-bold mb-4">Understand What People Really Think</h2>
-<p class="text-lg text-primary max-w-md">
+        <div className="flex flex-col justify-center items-center bg-primary-light  text-center p-8">
+        <h2 className="text-3xl font-bold mb-4">Understand What People Really Think</h2>
+<p className="text-lg text-primary max-w-md">
   Analyze customer reviews, spot trends, and get actionable insights to improve your product and user experience.
 </p>
           <img
             src="./dashbord.png"
             alt="Dashboard"
-            class="w-full  rounded-lg shadow-md"
+            className="w-full  rounded-lg shadow-md"
           />
         </div>
       </div>
