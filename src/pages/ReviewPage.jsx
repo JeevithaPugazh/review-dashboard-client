@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getReviews } from "../../utilities/apis/review-api";
+import { getReviews } from "../utilities/apis/review-api";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 

@@ -3,14 +3,14 @@ import {
   addProduct,
   getCategories,
   getProduct,
-} from "../../utilities/apis/product-api";
+} from "../utilities/apis/product-api";
 import { useNavigate } from "react-router-dom";
 import {
   getListOfCategories,
   getServices,
-} from "../../utilities/data-util";
-import ErrorMessage from "../../component/ErrorMessage";
-import Services from "../../component/Services";
+} from "../utilities/data-util";
+import ErrorMessage from "../component/ErrorMessage";
+import Services from "../component/Services";
 
 function AddProductPage() {
   const formRef = useRef();

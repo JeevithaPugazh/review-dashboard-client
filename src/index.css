@@ -1,0 +1,146 @@
+/* index.css */
+
+/* Colors */
+:root {
+    --primary: #F97316; /* Main orange (brand) */
+    --primary-hover: #EA580C; /* Hover orange (darker) */
+    --primary-light: #FDBA74; /* Subtle highlights (light orange) */
+    --background: #FFF7ED; /* Neutral off-white/orange-tinted */
+    --surface: #FFEDD5; /* Card or container background */
+    --text-primary: #1F2937; /* High-contrast text (dark gray) */
+    --text-secondary: #6B7280; /* Muted text (gray) */
+    --border: #FCD34D; /* Subtle border (amber) */
+    --accent: #FACC15; /* Highlight or badge (yellow) */
+    --accent-teal: #14B8A6; /* Teal accent */
+    --font-primary: 'Arial', sans-serif; /* Default font */
+    --font-secondary: 'Roboto', sans-serif; /* Secondary font for headings */
+  }
+  
+  /* Body */
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Headings */
+  h1, h2, h3, h4 {
+    color: var(--text-primary);
+    font-family: var(--font-secondary);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.75rem;
+  }
+  
+  /* Buttons */
+  button {
+    background-color: var(--primary);
+    color: white;
+    border: 2px solid var(--primary);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+  
+  /* Text */
+  .text-primary {
+    color: var(--text-primary);
+  }
+  
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+  
+  .text-accent {
+    color: var(--accent);
+  }
+  
+  /* Links */
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  a:hover {
+    color: var(--primary-hover);
+  }
+  
+  /* Cards/Containers */
+  .card {
+    background-color: var(--surface);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    font-family: var(--font-secondary);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  /* Form Elements */
+  input, textarea {
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  input:focus, textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+  }
+  
+  /* Custom Backgrounds */
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  
+  .bg-primary-light {
+    background-color: var(--primary-light);
+  }
+  
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  
+  /* Custom Borders */
+  .border-primary {
+    border: 2px solid var(--primary);
+  }
+  
+  /* Custom Accent */
+  .accent-teal {
+    color: var(--accent-teal);
+  }
+  
+
