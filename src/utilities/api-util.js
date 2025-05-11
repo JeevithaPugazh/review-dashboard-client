@@ -1,4 +1,5 @@
 const TOKEN_KEY = "token";
+const USER_KEY = "username";
 export const getAPIHeaders = (tokenRequired = false) => {
   let headers = {
     "Content-Type": "application/json",
@@ -11,6 +12,15 @@ export const getAPIHeaders = (tokenRequired = false) => {
   return headers;
 };
 
-export const storeSession = (token) => {
-  sessionStorage.setItem(TOKEN_KEY, token);
+export const storeSession = (data) => {
+  sessionStorage.setItem(TOKEN_KEY, data.token);
+  sessionStorage.setItem(USER_KEY, data.user.username);
 };
+export const getUserName = () => 
+    sessionStorage.getItem(USER_KEY);
+
+export const logout = () => {
+  sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(USER_KEY);
+  window.location  
+}

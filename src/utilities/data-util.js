@@ -19,3 +19,4 @@ export const getListOfCategories = (categoriesMap) => {
 };
 export const getServices = (categoriesMap, category) =>
   categoriesMap[category];
+

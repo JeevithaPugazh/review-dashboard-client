@@ -17,7 +17,11 @@ function App() {
           element={<ProductPage />}
         />
         <Route
-          path="/addProduct"
+          path="/editProduct/:id"
+          element={<AddProductPage />}
+        />
+         <Route
+          path="/addProduct/"
           element={<AddProductPage />}
         />
         <Route

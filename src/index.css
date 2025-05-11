@@ -142,5 +142,9 @@
   .accent-teal {
     color: var(--accent-teal);
   }
+  .bg-accent {
+    background-color: var(--accent) ;
+    color: var();
+  }
   
 

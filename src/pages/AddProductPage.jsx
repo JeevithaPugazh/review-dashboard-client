@@ -1,22 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   addProduct,
   getCategories,
   getProduct,
+  updateProduct,
 } from "../utilities/apis/product-api";
-import { useNavigate } from "react-router-dom";
 import {
   getListOfCategories,
   getServices,
 } from "../utilities/data-util";
 import ErrorMessage from "../component/ErrorMessage";
 import Services from "../component/Services";
+import Nav from "../component/Nav";
+import { useNavigate } from "react-router-dom";
 
-function AddProductPage() {
-  const formRef = useRef();
-  const { id: productId } = useParams();
+function AddProductPage({
+  productId,
+  onClose,
+  products,
+  setProducts,
+}) {
   const nav = useNavigate();
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
   const [error, setError] = useState("");
   const [product, setProduct] = useState(null);
   const [categoryMap, setCategoryMap] = useState({});
@@ -24,87 +31,163 @@ function AddProductPage() {
   const [selectedCategory, setSelectedCategory] =
     useState(null);
   const [services, setServices] = useState([]);
-  const loadCategoryInfo = () => {
-    getCategories().then((categoryResponse) => {
-      setCategoryMap(categoryResponse);
-      const categories = getListOfCategories(
-        categoryResponse
-      );
-      setServices(
-        getServices(
-          categoryResponse,
-          productId ? product.category : categories[0].value
-        )
-      );
-      setSelectedCategory(categories[0].value);
-      setCategories(categories);
-    });
-  };
-  useEffect(() => {
-    !product && loadCategoryInfo();
-  }, [product]);
+  const [loading, setLoading] = useState(true);
 
+  // Load product if editing
   useEffect(() => {
     if (productId) {
-      getProduct(productId).then((product) =>
-        setProduct(product)
-      );
+      getProduct(productId).then((product) => {
+        setProduct(product);
+        setName(product.name);
+        setDescription(product.description);
+        setLocation(product.location);
+      });
     } else {
-      loadCategoryInfo();
+      setLoading(false);
     }
-  }, []);
-  function changeCategory(e) {
-    console.log(e);
-    setServices(
-      getServices(categoryMap, e.currentTarget.value)
-    );
-    setSelectedCategory(e.currentTarget.value);
-  }
+  }, [productId]);
+
+  // Load category info
+  useEffect(() => {
+    getCategories().then((categoryResponse) => {
+      setCategoryMap(categoryResponse);
+      const categoryList = getListOfCategories(
+        categoryResponse
+      );
+      const defaultCategory =
+        product?.category || categoryList[0].value;
+      setCategories(categoryList);
+      setSelectedCategory(defaultCategory);
+      setServices(
+        getServices(categoryResponse, defaultCategory)
+      );
+      setLoading(false);
+    });
+  }, [product]);
+
+  const handleCategoryChange = (e) => {
+    const value = e.currentTarget.value;
+    setSelectedCategory(value);
+    setServices(getServices(categoryMap, value));
+  };
+
+  const handleSubmit = () => {
+    const payload = {
+      name,
+      location,
+      description,
+      category: selectedCategory,
+      services,
+    };
+
+    const action = productId
+      ? updateProduct(productId, payload)
+      : addProduct(payload);
+
+    action
+      .then((product) => {
+        onClose && onClose(); //: nav("/productPage");
+        let allProducts = [...products, product];
+        if (productId) {
+          allProducts = allProducts.map((p) => {
+            return p._id == productId ? product : p;
+          });
+        }
+        setProducts(allProducts);
+      })
+      .catch((e) => setError(e.message));
+  };
+
+  if (loading) return <div className="p-4">Loading...</div>;
+
   return (
-    <div>
-      <h2>Add New Product</h2>
-      {categories.length > 0 ? (
+    <div className="p-4 max-w-xl mx-auto bg-white rounded shadow">
+      <h2 className="text-2xl font-bold mb-4">
+        {productId ? "Edit Product" : "Add New Product"}
+      </h2>
+
+      <div className="space-y-4">
         <div>
-          Name{" "}
+          <label className="block mb-1 font-bold">
+            Name
+          </label>
           <input
             type="text"
-            name="name"
+            className="w-full border rounded p-2"
             value={name}
-            onInput={(e) => setName(e.currentTarget.value)}
             maxLength={60}
-          ></input>
-          Category
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block font-bold mb-1">
+            Description
+          </label>
+          <input
+            type="text"
+            className="w-full border rounded p-2"
+            value={description}
+            maxLength={60}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block font-bold mb-1">
+            Location
+          </label>
+          <input
+            type="text"
+            className="w-full border rounded p-2"
+            value={location}
+            maxLength={60}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block font-bold mb-1">
+            Category
+          </label>
           <select
-            name="category"
-            id="category"
+            className="w-full border rounded p-2"
             value={selectedCategory}
-            onChange={changeCategory}
+            onChange={handleCategoryChange}
+            disabled={!!productId}
           >
             {categories.map(({ value, label }) => (
-              <option value={value}>{label}</option>
+              <option key={value} value={value}>
+                {label}
+              </option>
             ))}
           </select>
-          <Services services={services}></Services>
-          <button
-            onClick={() =>
-              addProduct({
-                name,
-                category: selectedCategory,
-                services,
-              })
-                .then(() => nav("/productPage"))
-                .catch((e) => {
-                  setError(e.message);
-                })
-            }
-          >
-            Submit
-          </button>
         </div>
-      ) : (
-        <div>Loading...</div>
-      )}
-      {error != "" ? <ErrorMessage error={error} /> : null}
+
+        <div>
+          <label className="block font-bold mb-1">
+            Services
+          </label>
+          <Services services={services} />
+        </div>
+
+        {error && <ErrorMessage error={error} />}
+
+        <div className="flex justify-between mt-6">
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            {productId ? "Update Product" : "Add Product"}
+          </button>
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="text-gray-600 border border-gray-400 px-4 py-2 ml-2 rounded hover:bg-gray-100"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
