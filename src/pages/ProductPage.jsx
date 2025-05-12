@@ -96,7 +96,7 @@ function ProductPage() {
                   </a>
                 </div>
               </div>
-              <p class="mb-3 text-gray-500 dark:text-gray-400">
+              <p className="mb-3 text-gray-500 dark:text-gray-400">
                 {product.description}
               </p>
               <div className="text-secondary mb-4">
