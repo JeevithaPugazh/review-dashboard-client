@@ -32,6 +32,7 @@ function AddProductPage({
     useState(null);
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [image,setImage] = useState(null);
 
   // Load product if editing
   useEffect(() => {
@@ -78,6 +79,7 @@ function AddProductPage({
       description,
       category: selectedCategory,
       services,
+      image
     };
 
     const action = productId
@@ -89,9 +91,11 @@ function AddProductPage({
         onClose && onClose(); //: nav("/productPage");
         let allProducts = [...products, product];
         if (productId) {
-          allProducts = allProducts.map((p) => {
+          allProducts = products.map((p) => {
             return p._id == productId ? product : p;
           });
+        }else{
+          allProducts = [...products, product];
         }
         setProducts(allProducts);
       })
@@ -143,6 +147,16 @@ function AddProductPage({
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
+        <div>
+  <label className="block font-bold mb-1">Image</label>
+  <input
+    type="file"
+    accept="image/*"
+    className="w-full border rounded p-2"
+    onChange={(e) => setImage(e.target.files[0])}
+  />
+</div>
+
         <div>
           <label className="block font-bold mb-1">
             Category

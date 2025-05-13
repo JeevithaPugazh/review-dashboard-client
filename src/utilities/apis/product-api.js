@@ -1,4 +1,4 @@
-import { getAPIHeaders } from "../api-util";
+import { getAPIHeaders, toFormData } from "../api-util";
 export async function getProducts() {
   try {
     const response = await fetch(
@@ -66,9 +66,9 @@ export async function addProduct(product) {
       "http://localhost:3000/api/product",
       {
         method: "POST",
-        headers: getAPIHeaders(true),
+        headers: getAPIHeaders(true, false),
         mode: "cors",
-        body: JSON.stringify(product),
+        body: toFormData(product),
       }
     );
     const data = await response.json();
@@ -87,13 +87,14 @@ export async function addProduct(product) {
 
 export async function updateProduct(productId, product) {
   try {
+    console.log(product);
     const response = await fetch(
       `http://localhost:3000/api/product/${productId}`,
       {
         method: "PUT",
-        headers: getAPIHeaders(true),
+        headers: getAPIHeaders(true, false),
         mode: "cors",
-        body: JSON.stringify(product),
+        body: toFormData(product)
       }
     );
     const data = await response.json();
