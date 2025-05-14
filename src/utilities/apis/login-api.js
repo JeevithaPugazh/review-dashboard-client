@@ -1,8 +1,9 @@
-import { getAPIHeaders, storeSession } from "../api-util";
+import { getAPIHeaders, REACT_APP_API_URL, storeSession } from "../api-util";
+
 export async function handleLogin(email, password) {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/login",
+      `${REACT_APP_API_URL}login`,
       {
         method: "POST",
         headers: getAPIHeaders(),
@@ -32,7 +33,7 @@ export async function createUser(
 ) {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/user",
+      `${REACT_APP_API_URL}user`,
       {
         method: "POST",
         headers: getAPIHeaders(true),

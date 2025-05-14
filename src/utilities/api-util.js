@@ -1,5 +1,10 @@
 const TOKEN_KEY = "token";
 const USER_KEY = "username";
+
+export const REACT_APP_API_URL = "https://review-dashboard-server.onrender.com/api/";
+
+
+
 export const getAPIHeaders = (tokenRequired = false,contentTypeRequired = true) => {
   let headers = contentTypeRequired ? {
     "Content-Type":"application/json",

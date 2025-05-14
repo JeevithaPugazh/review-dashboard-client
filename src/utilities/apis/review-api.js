@@ -1,8 +1,8 @@
-import { getAPIHeaders } from "../api-util";
+import { getAPIHeaders, REACT_APP_API_URL } from "../api-util";
 export async function getReviews(productId) {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/review/${productId}`,
+      `${REACT_APP_API_URL}review/${productId}`,
       {
         headers: getAPIHeaders(true),
       }
