@@ -1,5 +1,25 @@
 import React from "react";
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend
+} from "chart.js";
 import { Line } from "react-chartjs-2";
+
+ChartJS.register(
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const LineGraph = ({ chartData }) => {
   const data = {
@@ -18,20 +38,18 @@ const LineGraph = ({ chartData }) => {
     ],
   };
 
-  const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            min: 1,
-            max: 5,
-            stepSize: 1,
-          },
-        },
-      ],
-    },
+   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    scales: {
+      y: {
+        min: 1,
+        max: 5,
+        ticks: {
+          stepSize: 1,
+        },
+      },
+    },
   };
 
   return <Line data={data} options={options} />;
