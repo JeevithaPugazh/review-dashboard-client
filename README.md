@@ -1,12 +1,46 @@
-# React + Vite
+# Revuhub - Review Aggregator Frontend
+Revuhub is a review analytics platform that helps users get insights from aggregated reviews across various sources.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### This is the frontend built with 
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Backend Codebase (Node.js + Express)
+[https://github.com/JeevithaPugazh/review-dashboard-server](https://github.com/JeevithaPugazh/review-dashboard-server)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### 1. Clone the repository:
+```bash
+git clone https://github.com/JeevithaPugazh/review-dashboard-client.git
+```
+#### 2. Install dependencies:
+```bash
+npm install
+```
+#### 3. Start the development server:
+```bash
+npm start
+```
+
+## ✨ Features
+
+* User registration and login
+* Auth-protected pages
+* Built using React and React Router
+* Product list, detail, add/edit/delete product
+* Dynamic Review Dashboard
+* Displays visual analytics using Chart.js.
+* Click on any product to view detailed reviews and analytics.
+* Styled with Tailwind CSS for a modern and responsive UI.
+
+## 🧪 To-Do
+* Filter reviews by keyword or topic
+
+* Add sentiment analysis
+
+## 📸 Screenshots
+![LoginPage ScreenShort](./LoginPage2.png)
+![ProductPage ScreenShort](./ProductPage.png)
+![ReviewDashboardPage ScreenShort](./ReviewDashboardPage.png)
+
