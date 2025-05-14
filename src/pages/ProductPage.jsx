@@ -106,7 +106,10 @@ function ProductPage() {
                 <div className="flex flex-wrap gap-2 m-5">
                   {product.services.map(
                     (service, index) => (
-                      <div key={index} className="pr-1 pb-1">
+                      <div
+                        key={index}
+                        className="pr-1 pb-1"
+                      >
                         <span className="bg-accent rounded-lg p-2">
                           ✔️{service.trim()}
                         </span>
@@ -117,14 +120,16 @@ function ProductPage() {
               </div>
 
               <div className="flex justify-between"></div>
-             { product.location && <footer class="rounded-lg dark:bg-gray-800">
-                <small class="w-full mx-auto max-w-screen-xl md:flex md:items-end">
-                  <span class="material-symbols-outlined mr-0">
-                    place
-                  </span>
-                  {product.location}
-                </small>
-              </footer> }
+              {product.location && (
+                <footer class="rounded-lg dark:bg-gray-800">
+                  <small class="w-full mx-auto max-w-screen-xl md:flex md:items-end">
+                    <span class="material-symbols-outlined mr-0">
+                      place
+                    </span>
+                    {product.location}
+                  </small>
+                </footer>
+              )}
             </div>
           ))}
         </div>

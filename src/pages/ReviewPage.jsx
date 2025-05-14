@@ -18,7 +18,7 @@ function ReviewPage() {
   const [chartData, setChartData] = useState([]);
   const [progress, setProgress] = useState([]);
   const [overallRating, setOverallRating] = useState([]);
-  const [totalRating,setTotalRating] = useState([]);
+  const [totalRating, setTotalRating] = useState([]);
   // const [expanded, setExpanded] = useState(false);
   const [product, setProduct] = useState(null);
   const [serviceRatings, setServiceRatings] = useState({});
@@ -39,9 +39,15 @@ function ReviewPage() {
         setChartData(formatted);
         const totalReview = response.length;
         setTotalRating(totalReview);
-        const totalRating = response.reduce((acc,review) => acc + review.rating, 0);
-        
-        const avgRating = totalReview > 0 ? (totalRating / totalReview).toFixed(1) : 0;
+        const totalRating = response.reduce(
+          (acc, review) => acc + review.rating,
+          0
+        );
+
+        const avgRating =
+          totalReview > 0
+            ? (totalRating / totalReview).toFixed(1)
+            : 0;
         setOverallRating(avgRating);
 
         const ratingCount = {
@@ -58,7 +64,6 @@ function ReviewPage() {
           }
         });
 
-        
         const ratingPercentage = {};
 
         Object.keys(ratingCount).forEach((key) => {
@@ -68,8 +73,6 @@ function ReviewPage() {
           ).toFixed(1);
         });
         setProgress(ratingPercentage);
-
-        
 
         const serviceSums = {};
         const serviceCounts = {};
@@ -102,23 +105,27 @@ function ReviewPage() {
       {product && (
         <>
           <Nav />
-          <div
-            className="material-symbols-outlined cursor-pointer mt-2 ml-2"
-            onClick={() => {
-              nav("/productPage");
-            }}
-          >
-            arrow_back_ios
+          <div className="mt-2 ml-2 flex flex-row">
+            <div
+              className=" cursor-pointer mr-2 hover:underline"
+              onClick={() => {
+                nav("/productPage");
+              }}
+            >
+              product
+            </div>
+            <div>/ review</div>
           </div>
           <div className="w-full h-full flex flex-row">
             <div className="w-1/5 flex flex-col mr-5 ml-5">
               <div className="h-full w-full card">
-                <div>
+                <div className="">
                   <img
                     className="rounded w-full h-90"
                     src={product.imageUrl}
                     alt={product.name}
                   ></img>
+
                   <div className="mt-5 w-full h-flex justify-center flex-col">
                     <div>
                       <b>{product.name}</b>
@@ -137,16 +144,19 @@ function ReviewPage() {
 
             <div className="h-full w-4/5 flex flex-col">
               <div className="h-2/4 flex flex-row mb-5 mr-5">
-                <div className="w-2/3 card mr-5">
-                <div className="flex">
-                  <div className="mr-10">
-                   <b>Overall rating:</b> {overallRating}⭐
+                <div className="w-2/3  card  mr-5">
+                  <div className="flex">
+                    <div className="mr-10">
+                      <b>Overall rating:</b> {overallRating}
+                      ⭐
+                    </div>
+                    <div>
+                      <b>Total Reviews:</b> {totalRating}
+                    </div>
                   </div>
-                  <div>
-                   <b>Total Reviews:</b> {totalRating}
+                  <div className="h-full w-full pb-5">
+                    <LineGraph chartData={chartData} />
                   </div>
-                  </div>
-                  <LineGraph chartData={chartData} />
                 </div>
                 <div className="w-1/3  card">
                   <h2 className="text-md font-bold mb-2">
@@ -169,7 +179,9 @@ function ReviewPage() {
                   />
                 </div>
                 <div className="w-2/3 flex flex-col mr-5 ">
-                <div className="h-10 bg-primary fixed w-2/4 rounded mb-5 pl-5 pt-2"><b>Reviews</b></div>
+                  <div className="h-10 bg-primary fixed w-2/4 rounded mb-5 pl-5 pt-2">
+                    <b>Reviews</b>
+                  </div>
                   <div className=" overflow-y-auto wrap-anywhere pr-2 bg-background p-5 rounded shadow-md">
                     {reviews.map((review) => (
                       <Review {...review} />

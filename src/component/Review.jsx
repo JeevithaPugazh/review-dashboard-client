@@ -27,7 +27,7 @@ function Review(review) {
       </p>
       {isLong && (
         <a
-          className="text-primary underline text-sm"
+          className="text-primary underline cursor-pointer text-sm"
           onClick={() => setExpanded((prev) => !prev)}
         >
           {expanded ? "View Less" : "View More"}
