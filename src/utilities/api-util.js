@@ -1,7 +1,7 @@
 const TOKEN_KEY = "token";
 const USER_KEY = "username";
 
-export const REACT_APP_API_URL = "https://review-dashboard-server.onrender.com/api/";
+export const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 
 

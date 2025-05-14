@@ -1,8 +1,8 @@
-import { getAPIHeaders, REACT_APP_API_URL, toFormData } from "../api-util";
+import { getAPIHeaders, API_BASE_URL , toFormData } from "../api-util";
 export async function getProducts() {
   try {
     const response = await fetch(
-      `${REACT_APP_API_URL}product`,
+      `${API_BASE_URL }product`,
       {
         headers: getAPIHeaders(true),
       }
@@ -17,7 +17,7 @@ export async function getProducts() {
 export async function getProduct(id) {
   try {
     const response = await fetch(
-      `${REACT_APP_API_URL}product/${id}`,
+      `${API_BASE_URL }product/${id}`,
       {
         headers: getAPIHeaders(true),
       }
@@ -32,7 +32,7 @@ export async function getProduct(id) {
 export async function deleteProduct(id) {
   try {
     const response = await fetch(
-      `${REACT_APP_API_URL}product/${id}`,
+      `${API_BASE_URL }product/${id}`,
       {
         method: "DELETE",
         headers: getAPIHeaders(true),
@@ -48,7 +48,7 @@ export async function deleteProduct(id) {
 export async function getCategories() {
   try {
     const response = await fetch(
-      `${REACT_APP_API_URL}product/categories/`,
+      `${API_BASE_URL }product/categories/`,
       {
         headers: getAPIHeaders(),
       }
@@ -63,7 +63,7 @@ export async function getCategories() {
 export async function addProduct(product) {
   try {
     const response = await fetch(
-      `${REACT_APP_API_URL}product`,
+      `${API_BASE_URL }product`,
       {
         method: "POST",
         headers: getAPIHeaders(true, false),
@@ -89,7 +89,7 @@ export async function updateProduct(productId, product) {
   try {
     console.log(product);
     const response = await fetch(
-      `${REACT_APP_API_URL}product/${productId}`,
+      `${API_BASE_URL }product/${productId}`,
       {
         method: "PUT",
         headers: getAPIHeaders(true, false),
