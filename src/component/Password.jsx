@@ -16,7 +16,7 @@ function Password(props) {
         type={showPassword ? "text" : "password"}
         value={props.password}
         onChange={(e) => props.setPassword(e.target.value)}
-        placeholder={props.placeholder || "Password"}
+        placeholder={props.placeholder || "password1"}
         required
       />
       <span
