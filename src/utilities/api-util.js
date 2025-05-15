@@ -3,12 +3,15 @@ const USER_KEY = "username";
 
 export const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-
-
-export const getAPIHeaders = (tokenRequired = false,contentTypeRequired = true) => {
-  let headers = contentTypeRequired ? {
-    "Content-Type":"application/json",
-  } : {};
+export const getAPIHeaders = (
+  tokenRequired = false,
+  contentTypeRequired = true
+) => {
+  let headers = contentTypeRequired
+    ? {
+        "Content-Type": "application/json",
+      }
+    : {};
   if (tokenRequired) {
     const token = sessionStorage.getItem(TOKEN_KEY);
     headers["Authorization"] = `Bearer ${token}`;
@@ -36,9 +39,12 @@ export const toFormData = (product) => {
   formData.append("location", product.location);
   formData.append("description", product.description);
   formData.append("category", product.category);
-  formData.append("services", JSON.stringify(product.services));
+  formData.append(
+    "services",
+    JSON.stringify(product.services)
+  );
   if (product.image) {
     formData.append("image", product.image);
   }
   return formData;
-}
+};
